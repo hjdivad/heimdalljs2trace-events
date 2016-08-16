@@ -1,1 +1,4 @@
 /node_modules
+/merged.json
+/heimdall.json
+/trace_trace-events.json
