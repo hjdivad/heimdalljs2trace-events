@@ -53,7 +53,7 @@ Node.prototype.findDescendant = function(matcher) {
 };
 
 
-let [pid, tid] = [52101, 1295];
+let [pid, tid] = [31192, 1295];
 
 let traceEventsData = JSON.parse(fs.readFileSync('trace_trace-events.json'), 'UTF8');
 let navigationStartTE = traceEventsData.traceEvents.find(te => te.name === 'navigationStart' && te.pid === pid && te.tid === tid);
@@ -75,10 +75,12 @@ for (let node of root.preOrderIterator()) {
   delete node.stats.own;
   delete node.stats.time;
 
-  let isAsync = node.id.name === 'pre-transition' || node.id.name === 'transition' || node.id.name === 'post-transition';
+  let isAsync = node.id.name === 'voyager' || node.id.name === 'pre-transition' || node.id.name === 'transition' || node.id.name === 'post-transition';
   let heimdallTraceEvents = [];
 
   if (isAsync) {
+    console.log("found async");
+    continue;
     traceEventsData.traceEvents.push({
       pid: pid,
       tid: tid,
